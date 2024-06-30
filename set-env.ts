@@ -1,5 +1,5 @@
-const { writeFile, existsSync, mkdirSync } = require('fs');
-const { promisify } = require('util');
+const {writeFile, existsSync, mkdirSync} = require('fs');
+const {promisify} = require('util');
 const path = require('path');
 const dotenv = require('dotenv');
 
@@ -17,9 +17,9 @@ const envConfigFile = `export const environment = {
 };
 `;
 
-(async () => {
+(async (): Promise<void> => {
   try {
-    await ensureDirectoryExistence(targetPath)
+    ensureDirectoryExistence(targetPath)
     await writeFilePromisified(targetPath, envConfigFile);
   } catch (err) {
     console.error(err);
@@ -27,8 +27,8 @@ const envConfigFile = `export const environment = {
   }
 })();
 
-function ensureDirectoryExistence(filePath: string) {
-  var dirname = path.dirname(filePath);
+function ensureDirectoryExistence(filePath: string): void {
+  const dirname = path.dirname(filePath);
   if (existsSync(dirname)) {
     return;
   }
